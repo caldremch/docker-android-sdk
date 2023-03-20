@@ -60,7 +60,7 @@ RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.2"
 
 COPY apkShrink.zip .
 
-RUN unzip -q apkShrink.zip -d "$ANDROID_HOME/apkShrink" && \
+RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
 	rm --force apkShrink.zip
 
 VOLUME [ "/root/.gradle", "/projects"]
