@@ -59,6 +59,9 @@ RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.0"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.2"
 
 
+RUN unzip -q apkShrink.zip -d "$ANDROID_HOME/apkShrink" && \
+	rm --force apkShrink.zip
+
 VOLUME [ "/root/.gradle", "/projects"]
 
 COPY daemon_proccess.sh .
