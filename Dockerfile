@@ -58,6 +58,7 @@ RUN yes | $ANDROID_SDK_MANAGER "build-tools;31.0.0"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.0"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.2"
 
+COPY apkShrink.zip .
 
 RUN unzip -q apkShrink.zip -d "$ANDROID_HOME/apkShrink" && \
 	rm --force apkShrink.zip
