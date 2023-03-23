@@ -65,12 +65,7 @@ RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
 
 
 #install python
-RUN apt-get install -y python3.11.2
-RUN ln -sf /usr/bin/python3.11.2 /usr/bin/python
-RUN ln -s /usr/local/bin/pip3 /usr/bin/pip3
-RUN ln -s /usr/local/bin/pip3 /usr/bin/pip
-RUN python --version
-RUN pip3 --version
+RUN  apt-get install -y python3-pip
 
 VOLUME [ "/root/.gradle", "/projects","/root/.cache/pip"]
 
