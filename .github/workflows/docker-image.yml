@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "dev-sdk-with-python" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "dev-sdk-with-python" ]
 
 jobs:
 
@@ -15,9 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag caldremch/android-sdk
+      run: docker build . --file Dockerfile --tag caldremch/android-sdk:python3
     - name: Login to Registry
       run: docker login --username=${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
     - name: Push Image
       run: |
-        docker push caldremch/android-sdk
+        docker push caldremch/android-sdk:python3

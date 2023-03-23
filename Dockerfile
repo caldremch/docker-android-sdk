@@ -63,7 +63,15 @@ COPY apkShrink.zip .
 RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
 	rm --force apkShrink.zip
 
-VOLUME [ "/root/.gradle", "/projects"]
+
+#install python
+RUN apt-get install -y python3.11
+RUN ln -sf /usr/bin/python3.11 /usr/bin/python
+RUN python --version
+RUN pip3 --version
+
+VOLUME [ "/root/.gradle", "/projects","/root/.cache/pip"]
+
 
 COPY daemon_proccess.sh .
 RUN nohup daemon_proccess.sh &
