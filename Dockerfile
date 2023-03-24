@@ -27,7 +27,7 @@ RUN mkdir --parents "$ANDROID_HOME" && \
 	mv cmdline-tools latest && \
 	mkdir cmdline-tools && \
 	mv latest cmdline-tools && \
-	rm --force sdk-tools.zip
+	rm -f sdk-tools.zip
 
 
 ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
@@ -60,7 +60,7 @@ RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.2"
 COPY apkShrink.zip .
 
 RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
-	rm --force apkShrink.zip
+	rm -f apkShrink.zip
 
 
 #install python
