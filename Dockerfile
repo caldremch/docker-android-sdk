@@ -30,7 +30,7 @@ RUN mkdir --parents "$ANDROID_HOME" && \
 	rm -f sdk-tools.zip
 
 
-ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
 ENV ANDROID_SDK_HOME="$ANDROID_HOME"
 ENV ANDROID_NDK_HOME="$ANDROID_NDK"
 
