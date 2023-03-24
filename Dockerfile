@@ -7,9 +7,6 @@ RUN #sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/r
 RUN apk add --no-cache unzip zip git curl
 RUN apk add --no-cache openjdk8 openjdk11 openjdk17
 
-#support china date
-RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone
-
 ENV ANDROID_HOME="/opt/android-sdk" \
 	ANDROID_SDK_HOME="/opt/android-sdk" \
 	ANDROID_SDK_ROOT="/opt/android-sdk" \
