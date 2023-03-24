@@ -62,12 +62,10 @@ COPY apkShrink.zip .
 RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
 	rm -f apkShrink.zip
 
-
-#install python
-RUN  apk add --no-cache python3-pip
+#install python3&pip3
+RUN  apk add --no-cache jq py3-configobj py3-pip py3-setuptools python3 python3-dev
 
 VOLUME [ "/root/.gradle", "/projects","/root/.cache/pip"]
-
 
 COPY daemon_proccess.sh .
 RUN nohup daemon_proccess.sh &
