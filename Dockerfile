@@ -1,13 +1,14 @@
-FROM  ubuntu:22.04
+FROM  alpine
 
-RUN apt-get update
-RUN apt-get install -y unzip
-RUN apt-get install -y zip
-RUN apt-get install -y git
-RUN apt-get install -y curl
+# china local build
+RUN #sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 
-RUN apt-get install -y --no-install-recommends openjdk-8-jdk
-RUN apt-get install -y --no-install-recommends openjdk-11-jdk
+# reduce the install cache , reduce the docker layer cache
+RUN apk add --no-cache unzip zip git curl
+RUN apk add --no-cache openjdk8 openjdk11 openjdk17
+
+#support china date
+RUN #cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo "Asia/Shanghai" > /etc/timezone
 
 ENV ANDROID_HOME="/opt/android-sdk" \
 	ANDROID_SDK_HOME="/opt/android-sdk" \
@@ -16,6 +17,7 @@ ENV ANDROID_HOME="/opt/android-sdk" \
 	ANDROID_NDK_ROOT="/opt/android-sdk/ndk/latest"
 
 ENV ANDROID_SDK_MANAGER=${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager
+ENV ANDROID_SDK_CMDLINE_TOOLS=${ANDROID_HOME}/cmdline-tools/latest/bin
 ENV ANDROID_SDK_HOME="$ANDROID_HOME"
 ENV ANDROID_NDK_HOME="$ANDROID_NDK"
 
@@ -65,7 +67,7 @@ RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
 
 
 #install python
-RUN  apt-get install -y python3-pip
+RUN  apk add --no-cache python3-pip
 
 VOLUME [ "/root/.gradle", "/projects","/root/.cache/pip"]
 

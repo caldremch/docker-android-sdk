@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "dev-sdk-with-python" ]
+    branches: [ "dev-sdk-with-python-alpine" ]
   pull_request:
-    branches: [ "dev-sdk-with-python" ]
+    branches: [ "dev-sdk-with-python-alpine" ]
 
 jobs:
 
