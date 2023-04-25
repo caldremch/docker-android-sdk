@@ -1,4 +1,4 @@
-FROM  alpine
+FROM ruby:2-alpine3.13
 
 # china local build
 RUN #sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
@@ -6,6 +6,15 @@ RUN #sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/r
 # reduce the install cache , reduce the docker layer cache
 RUN apk add --no-cache unzip zip git curl
 RUN apk add --no-cache openjdk8 openjdk11 openjdk17
+
+RUN apk --update add --virtual build_deps \
+    build-base \
+    libc-dev \
+    cmake \
+    && apk add icu-dev openssl-dev \
+    && gem install github-linguist \
+    && apk del build_deps \
+	&& rm /var/cache/apk/*
 
 ENV ANDROID_HOME="/opt/android-sdk" \
 	ANDROID_SDK_HOME="/opt/android-sdk" \
@@ -67,5 +76,5 @@ RUN  apk add --no-cache jq py3-configobj py3-pip py3-setuptools python3 python3-
 
 VOLUME [ "/root/.gradle", "/projects","/root/.cache/pip"]
 
-COPY daemon_proccess.sh .
-RUN nohup daemon_proccess.sh &
+#COPY daemon_proccess.sh .
+#RUN nohup daemon_proccess.sh &
