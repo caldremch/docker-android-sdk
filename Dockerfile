@@ -40,7 +40,7 @@ ENV PATH="$JAVA_HOME/bin:$PATH:$ANDROID_SDK_HOME/emulator:$ANDROID_SDK_HOME/cmdl
 
 
 RUN mkdir --parents "$ANDROID_HOME/.android/"
-RUN	echo '### User Sources for Android SDK Manager' > "$ANDROID_HOME/.android/repositories.cfg"
+RUN echo '### User Sources for Android SDK Manager' > "$ANDROID_HOME/.android/repositories.cfg"
 
 RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-33"
 RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-32"
@@ -65,5 +65,8 @@ RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
 
 VOLUME [ "/root/.gradle", "/projects"]
 
-COPY daemon_proccess.sh .
-RUN nohup daemon_proccess.sh &
+#COPY daemon_proccess.sh .
+#RUN nohup daemon_proccess.sh &
+
+#ENTRYPOINT ["exec", "$@"] # TODO
+ENTRYPOINT ["echo", "TODO"]
