@@ -1,6 +1,6 @@
-#! /bin/sh
+#!/bin/bash
 while true ; do
   echo "The daemon is running...."
-  sleep 10
+  sleep 10s
 done
 exit 0
