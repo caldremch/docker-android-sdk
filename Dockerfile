@@ -52,11 +52,23 @@ RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-28"
 RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-27"
 RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-26"
 
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;33.0.2"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;33.0.1"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;33.0.0"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;32.0.0"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;31.0.0"
-RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.0"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.3"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.2"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.1"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;30.0.0"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;29.0.3"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;29.0.2"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;29.0.1"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;29.0.0"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;28.0.3"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;28.0.2"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;27.0.3"
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;26.0.3"
 
 COPY apkShrink.zip .
 
@@ -69,4 +81,4 @@ VOLUME [ "/root/.gradle", "/projects"]
 #RUN nohup daemon_proccess.sh &
 
 #ENTRYPOINT ["exec", "$@"] # TODO
-ENTRYPOINT ["echo", "TODO"]
+#ENTRYPOINT ["echo", "TODO"]
