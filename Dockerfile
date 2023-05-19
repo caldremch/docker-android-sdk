@@ -8,35 +8,38 @@ RUN apt-get install -y curl
 
 RUN apt-get install -y --no-install-recommends openjdk-8-jdk
 RUN apt-get install -y --no-install-recommends openjdk-11-jdk
-
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
+	apt-get install -qq -y apt-utils locales
 RUN apt-get install -qq --no-install-recommends \
-        autoconf \
-        build-essential \
-        cmake \
-        file \
-        git-lfs \
-        gpg-agent \
-        less \
-        libc6-dev \
-        libgmp-dev \
-        libmpc-dev \
-        libmpfr-dev \
-        libxslt-dev \
-        libxml2-dev \
-        m4 \
-        ncurses-dev \
-        ocaml \
-        openjdk-17-jdk \
-        openssh-client \
-        pkg-config \
-        software-properties-common \
-        vim-tiny \
-        wget \
-        zipalign \
-        s3cmd \
-        python3-pip \
-        zlib1g-dev > /dev/nul \
-        && apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+	autoconf \
+	build-essential \
+	cmake \
+	file \
+	git-lfs \
+	gpg-agent \
+	less \
+	libc6-dev \
+	libgmp-dev \
+	libmpc-dev \
+	libmpfr-dev \
+	libxslt-dev \
+	libxml2-dev \
+	m4 \
+	ncurses-dev \
+	ocaml \
+	openjdk-17-jdk \
+	openssh-client \
+	pkg-config \
+	software-properties-common \
+	tzdata \
+	vim-tiny \
+	wget \
+	zipalign \
+	s3cmd \
+	python3-pip \
+	zlib1g-dev > /dev/nul \
+	&& apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* && \
+	echo 'debconf debconf/frontend select Dialog' | debconf-set-selections
 
 ENV ANDROID_HOME="/opt/android-sdk" \
 	ANDROID_SDK_HOME="/opt/android-sdk" \
