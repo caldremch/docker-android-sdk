@@ -9,9 +9,39 @@ RUN apt-get install -y curl
 RUN apt-get install -y --no-install-recommends openjdk-8-jdk
 RUN apt-get install -y --no-install-recommends openjdk-11-jdk
 
+RUN apt-get install -qq --no-install-recommends \
+        autoconf \
+        build-essential \
+        cmake \
+        file \
+        git-lfs \
+        gpg-agent \
+        less \
+        libc6-dev \
+        libgmp-dev \
+        libmpc-dev \
+        libmpfr-dev \
+        libxslt-dev \
+        libxml2-dev \
+        m4 \
+        ncurses-dev \
+        ocaml \
+        openjdk-17-jdk \
+        openssh-client \
+        pkg-config \
+        software-properties-common \
+        vim-tiny \
+        wget \
+        zipalign \
+        s3cmd \
+        python3-pip \
+        zlib1g-dev > /dev/nul \
+        && apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+
 ENV ANDROID_HOME="/opt/android-sdk" \
 	ANDROID_SDK_HOME="/opt/android-sdk" \
 	ANDROID_SDK_ROOT="/opt/android-sdk" \
+	FLUTTER_HOME="/opt/flutter" \
 	ANDROID_NDK="/opt/android-sdk/ndk/latest" \
 	ANDROID_NDK_ROOT="/opt/android-sdk/ndk/latest"
 
@@ -35,7 +65,7 @@ ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 ENV ANDROID_SDK_HOME="$ANDROID_HOME"
 ENV ANDROID_NDK_HOME="$ANDROID_NDK"
 
-ENV PATH="$JAVA_HOME/bin:$PATH:$ANDROID_SDK_HOME/emulator:$ANDROID_SDK_HOME/cmdline-tools/latest/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools"
+ENV PATH="$JAVA_HOME/bin:$PATH:$ANDROID_SDK_HOME/emulator:$ANDROID_SDK_HOME/cmdline-tools/latest/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$FLUTTER_HOME/bin:$FLUTTER_HOME/bin/cache/dart-sdk/bin"
 
 
 
@@ -76,6 +106,11 @@ RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
 	rm --force apkShrink.zip
 
 VOLUME [ "/root/.gradle", "/projects"]
+
+
+
+#flutter install 
+RUN git clone --depth 5 -b stable https://github.com/flutter/flutter.git ${FLUTTER_HOME} 
 
 #COPY daemon_proccess.sh .
 #RUN nohup daemon_proccess.sh &
