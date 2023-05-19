@@ -110,8 +110,8 @@ RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
 
 ARG NDK_VERSION="25.2.9519653"
 RUN echo "Installing ${NDK_VERSION}" && \
-    yes | $ANDROID_SDK_MANAGER ${DEBUG:+--verbose} "ndk;${NDK_VERSION}" > /dev/null && \
-    ln -sv $ANDROID_HOME/ndk/${NDK_VERSION} ${ANDROID_NDK}
+	yes | $ANDROID_SDK_MANAGER ${DEBUG:+--verbose} "ndk;${NDK_VERSION}" > /dev/null && \
+	ln -sv $ANDROID_HOME/ndk/${NDK_VERSION} ${ANDROID_NDK}
 
 RUN chmod 775 $ANDROID_HOME $ANDROID_NDK_ROOT/../
 
@@ -119,8 +119,9 @@ VOLUME [ "/root/.gradle", "/projects"]
 
 
 
-#flutter install 
-RUN git clone --depth 5 -b stable https://github.com/flutter/flutter.git ${FLUTTER_HOME} 
+#flutter install and specify tag name 2.10.5
+RUN git clone --depth 5 -b 2.10.5 https://github.com/flutter/flutter.git ${FLUTTER_HOME} 
+RUN flutter doctor
 
 #COPY daemon_proccess.sh .
 #RUN nohup daemon_proccess.sh &
