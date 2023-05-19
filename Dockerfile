@@ -68,7 +68,7 @@ ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 ENV ANDROID_SDK_HOME="$ANDROID_HOME"
 ENV ANDROID_NDK_HOME="$ANDROID_NDK"
 
-ENV PATH="$JAVA_HOME/bin:$PATH:$ANDROID_SDK_HOME/emulator:$ANDROID_SDK_HOME/cmdline-tools/latest/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$FLUTTER_HOME/bin:$FLUTTER_HOME/bin/cache/dart-sdk/bin"
+ENV PATH="$JAVA_HOME/bin:$PATH:$ANDROID_SDK_HOME/emulator:$ANDROID_SDK_HOME/cmdline-tools/latest/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$ANDROID_NDK:$FLUTTER_HOME/bin:$FLUTTER_HOME/bin/cache/dart-sdk/bin"
 
 
 
@@ -107,6 +107,13 @@ COPY apkShrink.zip .
 
 RUN unzip -q apkShrink.zip -d "$ANDROID_HOME" && \
 	rm --force apkShrink.zip
+
+ARG NDK_VERSION="25.2.9519653"
+RUN echo "Installing ${NDK_VERSION}" && \
+    yes | $ANDROID_SDK_MANAGER ${DEBUG:+--verbose} "ndk;${NDK_VERSION}" > /dev/null && \
+    ln -sv $ANDROID_HOME/ndk/${NDK_VERSION} ${ANDROID_NDK}
+
+RUN chmod 775 $ANDROID_HOME $ANDROID_NDK_ROOT/../
 
 VOLUME [ "/root/.gradle", "/projects"]
 
