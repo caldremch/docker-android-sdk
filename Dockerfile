@@ -68,9 +68,9 @@ ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 ENV ANDROID_SDK_HOME="$ANDROID_HOME"
 ENV ANDROID_NDK_HOME="$ANDROID_NDK"
 
-ENV PATH="$JAVA_HOME/bin:$PATH:$ANDROID_SDK_HOME/emulator:$ANDROID_SDK_HOME/cmdline-tools/latest/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$ANDROID_NDK:$FLUTTER_HOME/bin:$FLUTTER_HOME/bin/cache/dart-sdk/bin"
+ENV AAPT_HOME="${ANDROID_HOME}/build-tools/33.0.2"
 
-
+ENV PATH="$AAPT_HOME:$JAVA_HOME/bin:$PATH:$ANDROID_SDK_HOME/emulator:$ANDROID_SDK_HOME/cmdline-tools/latest/bin:$ANDROID_SDK_HOME/tools:$ANDROID_SDK_HOME/platform-tools:$ANDROID_NDK:$FLUTTER_HOME/bin:$FLUTTER_HOME/bin/cache/dart-sdk/bin"
 
 RUN mkdir --parents "$ANDROID_HOME/.android/"
 RUN echo '### User Sources for Android SDK Manager' > "$ANDROID_HOME/.android/repositories.cfg"
@@ -120,7 +120,7 @@ VOLUME [ "/root/.gradle", "/projects"]
 
 
 #flutter install and specify tag name 2.10.5
-RUN git clone --depth 5 -b 2.10.5 https://github.com/flutter/flutter.git ${FLUTTER_HOME} 
+RUN git clone --depth 5 -b 3.3.8 https://github.com/flutter/flutter.git ${FLUTTER_HOME} 
 RUN flutter doctor
 
 #COPY daemon_proccess.sh .
