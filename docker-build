@@ -1,0 +1,6 @@
+#!/bin/bash
+arg1=$1
+version=${arg1:=0.0.0}
+docker build . --file Dockerfile --tag caldremch/android-sdk:$version
+
+# docker run caldremch/android-sdk:$version clone https://github.com/docker/getting-started.git  
