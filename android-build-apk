@@ -1,0 +1,4 @@
+#!/bin/bash
+args=$@
+echo "args: ", $args
+echo "TODO: do build android apks"
