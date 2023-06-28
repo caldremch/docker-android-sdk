@@ -5,6 +5,8 @@ RUN apt-get install -y unzip
 RUN apt-get install -y zip
 RUN apt-get install -y git
 RUN apt-get install -y curl
+RUN apt-get install -y supervisor
+RUN apt-get install -y cloc
 
 RUN apt-get install -y --no-install-recommends openjdk-8-jdk
 RUN apt-get install -y --no-install-recommends openjdk-11-jdk
