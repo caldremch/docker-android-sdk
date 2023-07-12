@@ -16,6 +16,7 @@ RUN apt-get install -qq --no-install-recommends \
 	autoconf \
 	build-essential \
 	cmake \
+    ninja-build \
 	file \
 	git-lfs \
 	gpg-agent \
@@ -47,6 +48,7 @@ ENV ANDROID_HOME="/opt/android-sdk" \
 	ANDROID_SDK_HOME="/opt/android-sdk" \
 	ANDROID_SDK_ROOT="/opt/android-sdk" \
 	FLUTTER_HOME="/opt/flutter" \
+	FLUTTER_HOME_STABLE_LAST="/opt/flutter_stable_latest" \
 	ANDROID_NDK="/opt/android-sdk/ndk/latest" \
 	ANDROID_NDK_ROOT="/opt/android-sdk/ndk/latest"
 
@@ -123,6 +125,7 @@ VOLUME [ "/root/.gradle", "/projects"]
 
 #flutter install and specify tag name 2.10.5
 RUN git clone --depth 5 -b 3.3.8 https://github.com/flutter/flutter.git ${FLUTTER_HOME} 
+RUN git clone --depth 5 -b 3.10.5 https://github.com/flutter/flutter.git ${FLUTTER_HOME_STABLE_LAST}
 RUN flutter doctor
 
 #COPY daemon_proccess.sh .
