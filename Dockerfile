@@ -16,7 +16,7 @@ RUN apt-get install -qq --no-install-recommends \
 	autoconf \
 	build-essential \
 	cmake \
-    ninja-build \
+	ninja-build \
 	file \
 	git-lfs \
 	gpg-agent \
@@ -79,6 +79,8 @@ ENV PATH="$AAPT_HOME:$JAVA_HOME/bin:$PATH:$ANDROID_SDK_HOME/emulator:$ANDROID_SD
 RUN mkdir --parents "$ANDROID_HOME/.android/"
 RUN echo '### User Sources for Android SDK Manager' > "$ANDROID_HOME/.android/repositories.cfg"
 
+RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-34"
+RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-UpsideDownCake"
 RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-33"
 RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-32"
 RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-31"
@@ -89,6 +91,7 @@ RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-28"
 RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-27"
 RUN echo "platforms" && yes | $ANDROID_SDK_MANAGER "platforms;android-26"
 
+RUN yes | $ANDROID_SDK_MANAGER "build-tools;34.0.0"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;33.0.2"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;33.0.1"
 RUN yes | $ANDROID_SDK_MANAGER "build-tools;33.0.0"
